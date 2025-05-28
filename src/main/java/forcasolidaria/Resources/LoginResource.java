@@ -33,22 +33,26 @@ public class LoginResource {
             Log.error(e.getErrorCode());
             Log.error(e.getMessage());
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .header("Access-Control-Allow-Origin", "*")
                     .entity("Não foi possível se conectar ao banco de dados")
                     .build();
         }catch (IllegalAccessException e){
             Log.error("Há algum campo obrigatório vazio");
             Log.error(e.getMessage());
             return Response.status(Response.Status.BAD_REQUEST)
+                    .header("Access-Control-Allow-Origin", "*")
                     .entity("Há algum campo obrigatório vazio")
                     .build();
         }catch (Exception e){
             Log.error("Erro interno do servidor");
             Log.error(e.getMessage());
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .header("Access-Control-Allow-Origin", "*")
                     .entity("Erro interno do servidor")
                     .build();
         }
         return Response.status(Response.Status.CREATED)
+                .header("Access-Control-Allow-Origin", "*")
                 .entity("Usuário cadastrado com sucesso")
                 .build();
     }
