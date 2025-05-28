@@ -3,6 +3,7 @@ package forcasolidaria.Repositories;
 
 import forcasolidaria.Infrastructure.DatabaseConfig;
 import forcasolidaria.dtos.CadastroDTO;
+import forcasolidaria.dtos.LoginRequestDTO;
 import io.quarkus.logging.Log;
 import jakarta.enterprise.context.ApplicationScoped;
 
@@ -45,6 +46,22 @@ public class LoginRepository {
             preparedStatement.execute();
 
         }
+    }
+    public boolean loginUsuario(LoginRequestDTO loginRequestDTO) throws SQLException{
+
+        String query = "SELECT * FROM T_FS_VOLUNTARIO WHERE email = ?";
+        Connection connection = DatabaseConfig.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, loginRequestDTO.email());
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        if(resultSet.next()) {
+
+            if (resultSet.getString(4).equals(loginRequestDTO.senha())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
 
