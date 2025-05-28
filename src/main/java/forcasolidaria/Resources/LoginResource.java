@@ -1,5 +1,6 @@
 package forcasolidaria.Resources;
 
+import forcasolidaria.CORS.CORSFilter;
 import forcasolidaria.Repositories.LoginRepository;
 import forcasolidaria.dtos.CadastroDTO;
 import forcasolidaria.dtos.LoginReponseDTO;
@@ -62,11 +63,13 @@ public class LoginResource {
             if (logado){
                 Log.info("Usuário Logado");
                 return Response.status(Response.Status.OK)
+                        .header("Access-Control-Allow-Origin", "*")
                         .entity(new LoginReponseDTO(true, "Usuário logado com sucesso"))
                         .build();
             }else{
                 Log.info("email e/ou senha do usuário inválido");
                 return Response.status(Response.Status.UNAUTHORIZED)
+                        .header("Access-Control-Allow-Origin", "*")
                         .entity(new LoginReponseDTO(false, "email e/ou senha do usuário inválido"))
                         .build();
             }
@@ -75,12 +78,14 @@ public class LoginResource {
             Log.error(e.getErrorCode());
             Log.error(e.getMessage());
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .header("Access-Control-Allow-Origin", "*")
                     .entity(new LoginReponseDTO(false, "Não foi possível conectar-se ao banco de dados"))
                     .build();
         }catch (Exception e){
             Log.error("Erro interno do servidor");
             Log.error(e.getMessage());
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .header("Access-Control-Allow-Origin", "*")
                     .entity(new LoginReponseDTO(false, "Erro interno do servidor"))
                     .build();
         }
