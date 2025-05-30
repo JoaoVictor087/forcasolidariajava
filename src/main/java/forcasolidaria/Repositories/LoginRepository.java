@@ -56,7 +56,6 @@ public class LoginRepository {
         ResultSet resultSet = preparedStatement.executeQuery();
 
         if(resultSet.next()) {
-
             if (resultSet.getString(4).equals(loginRequestDTO.senha())) {
                 return true;
             }

@@ -1,6 +1,5 @@
 package forcasolidaria.Resources;
 
-import forcasolidaria.CORS.CORSFilter;
 import forcasolidaria.Repositories.LoginRepository;
 import forcasolidaria.dtos.CadastroDTO;
 import forcasolidaria.dtos.LoginReponseDTO;
@@ -27,6 +26,10 @@ public class LoginResource {
     public Response criarCadastro(@Valid CadastroDTO cadastroDTO) {
         try {
             loginRepository.criarConta(cadastroDTO);
+            return Response.status(Response.Status.CREATED)
+                    .header("Access-Control-Allow-Origin", "*")
+                    .entity("Usuário cadastrado com sucesso")
+                    .build();
 
         }catch (SQLException e){
             Log.error("Não foi possível se conectar ao banco de dados");
@@ -51,10 +54,7 @@ public class LoginResource {
                     .entity("Erro interno do servidor")
                     .build();
         }
-        return Response.status(Response.Status.CREATED)
-                .header("Access-Control-Allow-Origin", "*")
-                .entity("Usuário cadastrado com sucesso")
-                .build();
+
     }
 
     @POST
