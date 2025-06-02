@@ -1,45 +1,39 @@
 package forcasolidaria.entities;
 
 public class Solicitacao {
-    private String descricao;
-    private int id_local;
-    private int id_usuario;
-    private String local;
+    private String dsc;
+    private String titulo;
     private String status;
+    private int id_usuario;
+    private int id_categoria;
+    private int id_zona;
 
     public Solicitacao() {
     }
 
-    public Solicitacao(String descricao, String status, String local, int id_usuario, int id_local) {
-        this.descricao = descricao;
-        this.status = status;
-        this.local = local;
+    public Solicitacao(String dsc, int id_zona, int id_categoria, int id_usuario, String status, String titulo) {
+        this.dsc = dsc;
+        this.id_zona = id_zona;
+        this.id_categoria = id_categoria;
         this.id_usuario = id_usuario;
-        this.id_local = id_local;
+        this.status = status;
+        this.titulo = titulo;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getDsc() {
+        return dsc;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setDsc(String dsc) {
+        this.dsc = dsc;
     }
 
-    public int getId_local() {
-        return id_local;
+    public int getId_categoria() {
+        return id_categoria;
     }
 
-    public void setId_local(int id_local) {
-        this.id_local = id_local;
-    }
-
-    public String getLocal() {
-        return local;
-    }
-
-    public void setLocal(String local) {
-        this.local = local;
+    public void setId_categoria(int id_categoria) {
+        this.id_categoria = id_categoria;
     }
 
     public int getId_usuario() {
@@ -57,4 +51,21 @@ public class Solicitacao {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public int getId_zona() {
+        return id_zona;
+    }
+
+    public void setId_zona(int id_zona) {
+        this.id_zona = id_zona;
+    }
 }
+

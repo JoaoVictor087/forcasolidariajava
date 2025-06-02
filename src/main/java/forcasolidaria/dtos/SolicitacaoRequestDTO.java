@@ -14,13 +14,6 @@ public record SolicitacaoRequestDTO(
 
         String nm_usuario,
 
-        @NotBlank
-        @NotNull
-        String nm_local,
-
-        @NotBlank
-        @NotNull
-        String zona,
 
         @NotBlank
         @NotNull
@@ -32,7 +25,11 @@ public record SolicitacaoRequestDTO(
 
         @NotBlank
         @NotNull
-        String nm_categoria
+        String nm_categoria,
+
+        @NotNull
+        @NotBlank
+        String zona
 
 ) {
 }
