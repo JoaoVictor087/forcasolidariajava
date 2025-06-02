@@ -8,6 +8,8 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @ApplicationScoped
 public class SolicitacaoRepository {
@@ -90,7 +92,30 @@ public class SolicitacaoRepository {
         return 0;
     }
 
+    public List<Solicitacao> retornarListaSolicitacoes() throws SQLException {
+        List<Solicitacao> listaDeSolicitacao = new ArrayList<>();
 
+        Connection connection = DatabaseConfig.getConnection();
+        String query = "SELECT * FROM T_FS_SOLICITACAO WHERE (STATUS) = (?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, "pendente");
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+
+        while (resultSet.next()) {
+            Solicitacao solicitacao = new Solicitacao();
+            solicitacao.setTitulo(resultSet.getString("TITULO"));
+            solicitacao.setStatus(resultSet.getString("STATUS"));
+            solicitacao.setDsc(resultSet.getString("DSC"));
+            solicitacao.setId_usuario(resultSet.getInt("ID_USUARIO"));
+            solicitacao.setId_categoria(resultSet.getInt("ID_CATEGORIA"));
+            solicitacao.setId_zona(resultSet.getInt("ID_ZONA"));
+
+            listaDeSolicitacao.add(solicitacao);
+        }
+        return listaDeSolicitacao;
+
+    }
 
 }
 
