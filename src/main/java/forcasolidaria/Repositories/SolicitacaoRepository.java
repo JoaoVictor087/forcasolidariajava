@@ -97,7 +97,10 @@ public class SolicitacaoRepository {
         List<Solicitacao> listaDeSolicitacao = new ArrayList<>();
 
         Connection connection = DatabaseConfig.getConnection();
-        String query = "SELECT * FROM T_FS_SOLICITACAO WHERE (STATUS) = (?)";
+        String query = "SELECT s.*, u.NM_USUARIO " +
+                "FROM T_FS_SOLICITACAO s " +
+                "JOIN T_FS_USUARIO u ON s.ID_USUARIO = u.ID_USUARIO " +
+                "WHERE s.STATUS = (?)";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, "pendente");
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -105,13 +108,14 @@ public class SolicitacaoRepository {
 
         while (resultSet.next()) {
             Solicitacao solicitacao = new Solicitacao();
+
             solicitacao.setTitulo(resultSet.getString("TITULO"));
             solicitacao.setStatus(resultSet.getString("STATUS"));
             solicitacao.setDsc(resultSet.getString("DSC"));
             solicitacao.setId_usuario(resultSet.getInt("ID_USUARIO"));
             solicitacao.setId_categoria(resultSet.getInt("ID_CATEGORIA"));
             solicitacao.setId_zona(resultSet.getInt("ID_ZONA"));
-            solicitacao.setZona(retornaNomeZona(resultSet.getInt("ID ZONA")));
+            solicitacao.setZona(retornaNomeZona(resultSet.getInt("ID_ZONA")));
             solicitacao.setNm_usuario(resultSet.getString("NM_USUARIO"));
             solicitacao.setEndereco(resultSet.getString("ENDERECO"));
 

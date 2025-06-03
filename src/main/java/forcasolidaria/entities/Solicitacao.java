@@ -110,5 +110,20 @@ public class Solicitacao {
         this.zona = zona;
     }
 
+    @Override
+    public String toString() {
+        return "Solicitacao{" +
+                "dsc='" + dsc + '\'' +
+                ", titulo='" + titulo + '\'' +
+                ", status='" + status + '\'' +
+                ", id_usuario=" + id_usuario +
+                ", id_categoria=" + id_categoria +
+                ", id_zona=" + id_zona +
+                ", endereco='" + endereco + '\'' +
+                ", nm_usuario='" + nm_usuario + '\'' +
+                ", categoria='" + categoria + '\'' +
+                ", zona='" + zona + '\'' +
+                '}';
+    }
 }
 
