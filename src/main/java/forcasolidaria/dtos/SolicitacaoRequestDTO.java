@@ -29,7 +29,11 @@ public record SolicitacaoRequestDTO(
 
         @NotNull
         @NotBlank
-        String zona
+        String zona,
+
+        @NotNull
+        @NotBlank
+        String endereco
 
 ) {
 }

@@ -2,6 +2,7 @@ package forcasolidaria.entities;
 
 import java.util.Date;
 
+
 public class Login {
     private String email;
     private String senha;

@@ -33,8 +33,8 @@ public class SolicitacaoRepository {
         solicitacao.setTitulo(dto.titulo());
 
 
-        String query = "INSERT INTO T_FS_SOLICITACAO(DSC,TITULO,STATUS,ID_USUARIO,ID_CATEGORIA,id_zona)"
-                + "VALUES (?,?,?,?,?,?)";
+        String query = "INSERT INTO T_FS_SOLICITACAO(DSC,TITULO,STATUS,ID_USUARIO,ID_CATEGORIA,id_zona, endereco)"
+                + "VALUES (?,?,?,?,?,?,?)";
         Connection connection = DatabaseConfig.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(query);
 
@@ -44,6 +44,7 @@ public class SolicitacaoRepository {
         preparedStatement.setLong(4, id_usuario);
         preparedStatement.setInt(5,id_categoria);
         preparedStatement.setInt(6,id_zona);
+        preparedStatement.setString(7,dto.endereco());
 
         preparedStatement.executeUpdate();
         Log.info("Solicitação criada");
@@ -110,11 +111,33 @@ public class SolicitacaoRepository {
             solicitacao.setId_usuario(resultSet.getInt("ID_USUARIO"));
             solicitacao.setId_categoria(resultSet.getInt("ID_CATEGORIA"));
             solicitacao.setId_zona(resultSet.getInt("ID_ZONA"));
+            solicitacao.setZona(retornaNomeZona(resultSet.getInt("ID ZONA")));
+            solicitacao.setNm_usuario(resultSet.getString("NM_USUARIO"));
+            solicitacao.setEndereco(resultSet.getString("ENDERECO"));
 
             listaDeSolicitacao.add(solicitacao);
         }
         return listaDeSolicitacao;
 
+    }
+
+    public String retornaNomeZona(int zona){
+        if (zona == 1){
+            return "zona norte";
+        }
+        if (zona == 2){
+            return "zona leste";
+        }
+        if (zona == 3){
+            return "zona sul";
+        }
+        if (zona == 4){
+            return "zona oeste";
+        }
+        if (zona == 5){
+            return "centro";
+        }
+        return null;
     }
 
 }
