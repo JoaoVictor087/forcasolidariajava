@@ -103,7 +103,7 @@ Respostas:
 
 500 INTERNAL_SERVER_ERROR: "Não foi possível se conectar ao banco de dados" ou "Erro interno do servidor". 
 
-POST /user/login
+## POST /user/login
 Descrição: Autentica um voluntário existente.
 
 Consumes: application/json
